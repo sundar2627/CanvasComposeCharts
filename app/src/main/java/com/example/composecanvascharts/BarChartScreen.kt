@@ -2,13 +2,21 @@ package com.example.composecanvascharts
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -17,16 +25,17 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 private val defaultMaxHeight = 300.dp
-
+@Preview(showBackground = true)
 @Composable
 fun BarChartScreen(
 ) {
 
-    Column {
+    Column (modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)){
         barChartSetup(
             modifier = Modifier.padding(20.dp),
             values = barChartInputsPercent,
@@ -84,8 +93,7 @@ fun barChartSetup(
         values.forEach { item ->
             Log.d("GTYHU", "$item")
             Bar(
-                value = item,
-                color = Color.Magenta,
+                value = item, color = Color.Magenta,
                 maxHeight = maxHeight
             )
         }
@@ -109,7 +117,7 @@ private fun RowScope.Bar(
             .padding(horizontal = 5.dp)
             .height(itemHeight.dp)
             .weight(1f)
-            .background(color)
+            .border(width = 2.dp,color=color, shape = RoundedCornerShape(15.dp))
     )
 }
 

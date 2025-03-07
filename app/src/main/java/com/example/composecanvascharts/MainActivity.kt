@@ -7,9 +7,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -41,8 +44,8 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(navController = navController, startDestination = "mainUI") {
                     composable("mainUI") { MainUI(navController) }
-                   // composable("barChartScreen") { BarChartScreen() }
-                    composable("barChartScreen") { DrawXAxisWithLabels() }
+               //    composable("barChartScreen") { BarChartScreen() }
+                   composable("barChartScreen") { DrawXAxisWithLabels() }
                 }
             }
         }
@@ -58,7 +61,7 @@ fun PreviewMainUI() {
 
 @Composable
 fun MainUI(navController: NavController = rememberNavController()) {
-    Column(Modifier.fillMaxSize()) {
+    Column (modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)){
 
         val context = LocalContext.current
 
