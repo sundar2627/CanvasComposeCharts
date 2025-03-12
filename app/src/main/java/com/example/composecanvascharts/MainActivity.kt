@@ -45,7 +45,8 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navController, startDestination = "mainUI") {
                     composable("mainUI") { MainUI(navController) }
                //    composable("barChartScreen") { BarChartScreen() }
-                   composable("barChartScreen") { DrawXAxisWithLabels() }
+                 //  composable("barChartScreen") { DrawXAxisWithLabels() }
+                   composable("barChartScreen") { DrawAxisWithLabels() }
                 }
             }
         }

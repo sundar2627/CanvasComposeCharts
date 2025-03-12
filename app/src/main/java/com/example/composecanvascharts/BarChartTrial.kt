@@ -4,6 +4,7 @@ import android.graphics.Paint
 import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
@@ -23,9 +24,9 @@ fun DrawXAxisWithLabels() {
     val numberOfIntervals = totalValue / interval
 
     Canvas(modifier = Modifier
-        .fillMaxWidth()
-        .height(500.dp)) {
-        val lineHeight = size.height - 200.dp.toPx()
+        .fillMaxSize()
+       ) {
+        val lineHeight = size.height /2
        // val lineHeight = size.height - 200.dp.toPx()
         var startXPosition = 50f
         var endPosition = size.width - 50f
@@ -71,11 +72,14 @@ fun DrawXAxisWithLabels() {
             }
         }
 
+        var startYPosition = 50f
+        var endYPosition = size.height - lineHeight
+
         // Draw Y-axis (Base line)
         drawLine(
-            color = Color.Black,
+            color = Color.Red,
             start = Offset(50f, lineHeight),
-            end = Offset(50f, lineHeight-500.dp.toPx()),
+            end = Offset(50f, size.height-lineHeight),
             strokeWidth = 2.dp.toPx()
         )
 
@@ -83,7 +87,7 @@ fun DrawXAxisWithLabels() {
         val yInterval = 10
         val yNumberOfIntervals = ytotalValue / yInterval
 
-        Log.d("yjuio", "$ytotalValue--$yInterval--$yNumberOfIntervals ")
+        Log.d("xxxxx", "$ytotalValue--$yInterval--$yNumberOfIntervals")
 
         drawIntoCanvas { canvas ->
 
@@ -94,21 +98,21 @@ fun DrawXAxisWithLabels() {
             }
 
             for (i in 0 ..yNumberOfIntervals.toInt()) {
-                val yPosition = lineHeight - (i * yNumberOfIntervals)
-                Log.d("yjuio1", "i=$i --$yPosition")   // 1180
+                val yPosition =  startYPosition + (i * yNumberOfIntervals)
+                Log.d("xxxxx1", "i=$i --$yPosition")   // 1180
 
                 // Draw tick marks
                 drawLine(
                     color = Color.Green,
-                    start = Offset(50f, yPosition),
-                    end = Offset(50f, yPosition),
+                    start = Offset(50f, yPosition.toFloat()),
+                   end = Offset(20f, endYPosition),
                     strokeWidth = 2.dp.toPx()
                 )
 
                 // Draw labels below the line
                 canvas.nativeCanvas.drawText(
                     "${i * yInterval}",
-                    yPosition,
+                    yPosition.toFloat()                                         ,
                     lineHeight + 40f, // Adjusted for better spacing
                     textPaint1
                 )
